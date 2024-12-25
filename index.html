@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>圣诞贺卡 - Emoji星星雨</title>
+  <style>
+    /* 页面整体设置 */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+      /* 背景图：你可以改成本地图片，或者换成别的外链 */
+      background: url("https://images.pexels.com/photos/6129297/pexels-photo-6129297.jpeg") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* 圣诞贺卡主体 */
+    .card {
+      position: absolute;
+      width: 100%;
+      top: 35%;
+      text-align: center;
+      color: #fff;
+    }
+
+    .card h1 {
+      margin: 0 0 20px;
+      font-size: 48px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+
+    /* 输入区域 */
+    .input-area {
+      margin-bottom: 30px;
+    }
+    .input-area input {
+      padding: 8px;
+      font-size: 16px;
+      width: 200px;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+    }
+    .input-area button {
+      margin-left: 10px;
+      padding: 8px 16px;
+      font-size: 16px;
+      background: #ff4e50;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+    .input-area button:hover {
+      background: #ff7676;
+    }
+
+    /* 闪烁大字 */
+    #message {
+      font-size: 44px;
+      margin-top: 20px;
+      text-shadow: 0 0 8px #fff, 2px 2px 5px rgba(0,0,0,0.5);
+      min-height: 60px;
+      animation: blink 1s infinite alternate;
+      white-space: nowrap;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
+    /* 随机祝福语 */
+    #blessing {
+      margin-top: 15px;
+      font-size: 24px;
+      min-height: 40px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+
+    /* Emoji星星 */
+    .star {
+      position: absolute;
+      font-size: 32px; /* 你可以根据需要调大小 */
+      pointer-events: none;
+      animation: starFall linear;
+      opacity: 0.9;
+    }
+    @keyframes starFall {
+      0% {
+        transform: translateY(-100%) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>圣诞快乐</h1>
+  <div class="input-area">
+    <input type="text" id="nameInput" placeholder="请输入你的名字">
+    <button id="confirmBtn">确认</button>
+  </div>
+  <div id="message"></div>
+  <div id="blessing"></div>
+</div>
+
+<script>
+  // 测试脚本是否正常运行
+  console.log("脚本已开始运行");
+
+  // 随机祝福语
+  const blessings = [
+    "愿你在这圣诞之夜，心中充满无限温暖与喜悦。",
+    "愿这颗圣诞树，挂满你一整年的好运与幸福。",
+    "圣诞的钟声，为你敲响快乐的乐章。",
+    "愿你感受到这季节的温暖，和我对你深深的祝福。",
+    "圣诞节愿你笑容不减，幸福常伴。",
+    "愿你平安喜乐，心想事成，圣诞快乐哟！"
+  ];
+
+  // 点击按钮时，显示名字和祝福
+  function showMessage() {
+    console.log("showMessage函数被触发");
+    const name = document.getElementById("nameInput").value.trim();
+    const messageDiv = document.getElementById("message");
+    const blessingDiv = document.getElementById("blessing");
+
+    if (name) {
+      messageDiv.innerText = `${name}, Merry Christmas! 🎄`;
+      // 随机一条祝福语
+      const randomBlessing = blessings[Math.floor(Math.random() * blessings.length)];
+      blessingDiv.innerText = randomBlessing;
+    } else {
+      messageDiv.innerText = "请输入名字再试试哦";
+      blessingDiv.innerText = "";
+    }
+  }
+
+  // 绑定按钮事件
+  document.getElementById("confirmBtn").addEventListener("click", showMessage);
+
+  // 制造星星雨
+  function createStar() {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.innerText = "✨"; // 用 Emoji 星星
+
+    // 随机水平位置
+    const leftPos = Math.random() * 100; 
+    star.style.left = leftPos + 'vw';
+
+    // 随机大小
+    const size = 20 + Math.random() * 20; // 20 - 40
+    star.style.fontSize = size + 'px';
+
+    // 动画时长 & 延迟
+    const duration = 4 + Math.random() * 4; // 4~8秒
+    const delay = Math.random() * 2;        // 0~2秒
+    star.style.animationDuration = duration + 's';
+    star.style.animationDelay = delay + 's';
+
+    // 添加到页面
+    document.body.appendChild(star);
+
+    // 动画结束后移除元素
+    setTimeout(() => {
+      star.remove();
+    }, (duration + delay) * 1000);
+  }
+
+  // 每隔0.5秒生成一颗星星
+  setInterval(createStar, 500);
+
+  console.log("脚本执行结束");
+</script>
+
+</body>
+</html>
