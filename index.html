@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alex用GPT给大家做的圣诞贺卡~</title>
   <style>
     /* 页面整体设置 */
@@ -11,8 +12,7 @@
       height: 100%;
       overflow: hidden;
       font-family: sans-serif;
-      /* 背景图：你可以改成本地图片，或者换成别的外链 */
-      background: url("https://images.pexels.com/photos/6129297/pexels-photo-6129297.jpeg") no-repeat center center fixed;
+      background: url("https://images.pexels.com/photos/6129297/pexels-photo-6129297.jpeg") no-repeat center center;
       background-size: cover;
     }
 
@@ -27,7 +27,7 @@
 
     .card h1 {
       margin: 0 0 20px;
-      font-size: 56px; /* 调大标题文字 */
+      font-size: 56px; /* 默认字体大小 */
       text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
     }
 
@@ -36,17 +36,17 @@
       margin-bottom: 30px;
     }
     .input-area input {
-      padding: 10px; /* 调整内边距 */
-      font-size: 18px; /* 输入框文字大一点 */
-      width: 220px; /* 输入框加宽 */
+      padding: 10px;
+      font-size: 18px;
+      width: 220px;
       outline: none;
       border: none;
       border-radius: 4px;
     }
     .input-area button {
       margin-left: 12px;
-      padding: 10px 20px; 
-      font-size: 18px; /* 按钮文字加大 */
+      padding: 10px 20px;
+      font-size: 18px;
       background: #ff4e50;
       border: none;
       border-radius: 4px;
@@ -60,7 +60,7 @@
 
     /* 闪烁大字 */
     #message {
-      font-size: 48px; /* 调整主信息字体大小 */
+      font-size: 48px;
       margin-top: 20px;
       text-shadow: 0 0 8px #fff, 2px 2px 5px rgba(0,0,0,0.5);
       min-height: 60px;
@@ -75,7 +75,7 @@
     /* 随机祝福语 */
     #blessing {
       margin-top: 15px;
-      font-size: 28px; /* 随机祝福语稍微加大 */
+      font-size: 28px;
       min-height: 40px;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
     }
@@ -83,7 +83,7 @@
     /* Emoji星星 */
     .star {
       position: absolute;
-      font-size: 32px; /* 星星大小适中 */
+      font-size: 32px;
       pointer-events: none;
       animation: starFall linear;
       opacity: 0.9;
@@ -96,6 +96,19 @@
       100% {
         transform: translateY(120vh) rotate(720deg);
         opacity: 0;
+      }
+    }
+
+    /* 手机端优化 */
+    @media screen and (max-width: 768px) {
+      .card h1 {
+        font-size: 40px; /* 小屏幕标题缩小 */
+      }
+      #message {
+        font-size: 36px; /* 小屏幕主信息缩小 */
+      }
+      #blessing {
+        font-size: 22px; /* 随机祝福语缩小 */
       }
     }
   </style>
